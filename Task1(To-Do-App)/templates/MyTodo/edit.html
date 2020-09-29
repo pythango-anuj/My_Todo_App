@@ -1,0 +1,72 @@
+{% extends 'MyTodo/base.html' %}
+
+{% block title %} Task Form {% endblock %}
+
+{% block css %}
+
+.bg-light{
+    background-color: #b0c5de!important;  
+}
+.container {
+    background-color: #b0c5de!important;
+    margin-top: 50px;
+}
+.button-position {
+    position: relative;
+    allign: center;
+}
+{% endblock %}
+
+{% block content %}
+
+<nav id="navbar-example2" class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#"><b>My Todo List</b></a>
+</nav>
+<div class="container border-rounded">
+    <h2>Create a Task</h2>
+    <hr>
+    <form method="POST" action="{% url 'Update_Task' task.pk %}">
+        {% csrf_token %}
+      <div class="form-group">
+        <label for="text">Task Name</label>
+        <input type="text" class="form-control" id="task" value="{{task.task_name}}" placeholder="Enter Task Name" name="task_name">
+      </div>
+      <div class="form-group">
+        <label for="date">Expected Date of Completion</label>
+        <input type="text" class="form-control" id="date" value="{{task.end_date}}" placeholder="DD/MM/YYYY" name="end_date">
+      </div>
+      <div class="form-group">
+        <label for="date">Status of Task</label>
+      <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">Options</label>
+        <select class="custom-select" id="inputGroupSelect01" name="status">
+          <option selected>Choose New status...</option>
+          <option value="Yet To Start">Yet to Start</option>
+          <option value="In Progress">In Progress</option>
+          <option value="In Review">In Review</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </div>
+      </div>
+      <div class="form-group">
+        <label for="date">Priority of Task</label>
+      <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect02">Options</label>
+        <select class="custom-select" id="inputGroupSelect02" name="priority">
+          <option selected>Choose New priority...</option>
+          <option value="Low">Low</option>
+          <option value="Intermediate">Intermediate</option>
+          <option value="High">High</option>
+        </select>
+      </div>
+      </div>
+      <div class="form-group">
+        <label for="assignees">Assignee Names</label>
+        <input type="text" class="form-control" id="assignees" value="{{task.assignees}}" placeholder="Enter The Names of Assignees" name="assignees">
+      </div>
+      <button type="submit" class="btn btn-primary button-position">Update</button>
+    </form>
+    <br>
+</div>
+
+{% endblock %}
